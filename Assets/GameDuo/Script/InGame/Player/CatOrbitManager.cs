@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 public class CatOrbitManager : MonoBehaviour
 {
-    [SerializeField] GameObject catPrefab;
-    [SerializeField] float radius = 2.5f;
+    [SerializeField] private GameObject catPrefab;
+    [SerializeField] private float radius = 2.5f;
 
     [Header("Follow Speed (자연스러운 차이)")]
-    [SerializeField] float followSpeedMin = 8f;
-    [SerializeField] float followSpeedMax = 14f;
+    [SerializeField] private float followSpeedMin = 8f;
+    [SerializeField] private float followSpeedMax = 14f;
 
-    [SerializeField] CombatStats sharedStats = new CombatStats();
+    [SerializeField] private CombatStats sharedStats = new CombatStats();
 
     readonly List<CatUnit> cats = new();
     private Transform _player;

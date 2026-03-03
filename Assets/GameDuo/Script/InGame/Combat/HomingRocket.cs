@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class HomingRocket : MonoBehaviour
 {
-    [SerializeField] float speed           = 8f;
-    [SerializeField] float explosionRadius = 1.2f;
-    [SerializeField] float lifetime        = 3f; // 자동 디스폰 시간(초)
+    [SerializeField] private float speed           = 8f;
+    [SerializeField] private float explosionRadius = 1.2f;
+    [SerializeField] private float lifetime        = 3f; // 자동 디스폰 시간(초)
 
     private Vector2 _direction;
     private float _elapsed;
@@ -14,18 +14,12 @@ public class HomingRocket : MonoBehaviour
         _elapsed = 0f;
     }
 
-    public void SetTarget(Enemy enemy, Vector2 directionHint)
+    public void SetTarget(Enemy enemy)
     {
-        if (enemy != null)
-        {
-            Vector2 toTarget = ((Vector2)enemy.transform.position - (Vector2)transform.position).normalized;
-            Vector2 hinted   = (toTarget + directionHint * 0.35f).normalized;
-            _direction = hinted.sqrMagnitude > 0.0001f ? hinted : toTarget;
-        }
-        else
-        {
-            _direction = Vector2.right;
-        }
+        _elapsed   = 0f; // 풀 재사용 시 타이머 보장 초기화 (OnEnable 보조)
+        _direction = enemy != null
+            ? ((Vector2)enemy.transform.position - (Vector2)transform.position).normalized
+            : Vector2.right;
 
         _ApplyRotation();
     }
@@ -76,9 +70,9 @@ public class HomingRocket : MonoBehaviour
         }
 
         if (PoolManager.Instance != null)
-        {
             PoolManager.Instance.GetEffect(transform.position);
-        }
+
+        CameraFollow.Instance?.Shake();
 
         _ReturnToPool();
     }

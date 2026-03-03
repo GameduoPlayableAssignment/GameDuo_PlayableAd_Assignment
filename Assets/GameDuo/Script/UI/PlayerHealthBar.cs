@@ -6,9 +6,9 @@ using UnityEngine;
 /// </summary>
 public class PlayerHealthBar : MonoBehaviour
 {
-    [SerializeField] Transform     playerTransform;
-    [SerializeField] Vector3       offset   = new Vector3(0f, 1.2f, 0f);
-    [SerializeField] RectTransform fillRect; // Pivot X = 0 으로 설정
+    [SerializeField] private Transform     playerTransform;
+    [SerializeField] private Vector3       offset   = new Vector3(0f, 1.2f, 0f);
+    [SerializeField] private RectTransform fillRect; // Pivot X = 0 으로 설정
 
     private void LateUpdate()
     {

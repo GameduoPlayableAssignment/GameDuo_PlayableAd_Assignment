@@ -7,11 +7,11 @@ public class CutSequenceController : MonoBehaviour
     public static CutSequenceController Instance { get; private set; }
 
     [Header("Refs")]
-    [SerializeField] DownloadNowUI ctaUI;
+    [SerializeField] private DownloadNowUI ctaUI;
 
     [Header("Cut Tuning")]
-    [SerializeField] float slowmoScale            = 0.15f;
-    [SerializeField] float slowmoDurationUnscaled = 1.2f;
+    [SerializeField] private float slowmoScale            = 0.15f;
+    [SerializeField] private float slowmoDurationUnscaled = 1.2f;
 
     private bool _ctaTriggered;
 

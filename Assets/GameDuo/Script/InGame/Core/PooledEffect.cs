@@ -11,7 +11,7 @@ using UnityEngine;
 /// </summary>
 public class PooledEffect : MonoBehaviour
 {
-    [SerializeField] float duration = 1.5f;
+    [SerializeField] private float duration = 1.5f;
 
     private ParticleSystem[] _systems;
     private float _timer;

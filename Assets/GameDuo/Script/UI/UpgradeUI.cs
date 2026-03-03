@@ -6,14 +6,14 @@ using UnityEngine.Serialization;
 
 public class UpgradeUI : MonoBehaviour
 {
-    [SerializeField] GameObject root;
-    [SerializeField] UIButton btn0;
-    [SerializeField] UIButton btn1;
-    [SerializeField] UIButton btn2;
+    [SerializeField] private GameObject root;
+    [SerializeField] private UIButton btn0;
+    [SerializeField] private UIButton btn1;
+    [SerializeField] private UIButton btn2;
 
-    [SerializeField] TMP_Text text_desc;
-    [SerializeField] TMP_Text text_desc1;
-    [SerializeField] TMP_Text text_desc2;
+    [SerializeField] private TMP_Text text_desc;
+    [SerializeField] private TMP_Text text_desc1;
+    [SerializeField] private TMP_Text text_desc2;
 
     UpgradePhase currentPhase;
     UpgradeOption[] currentOpts;

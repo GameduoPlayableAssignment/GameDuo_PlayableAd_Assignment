@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class CatUnit : MonoBehaviour
 {
-    [SerializeField] Transform firePoint;           // 로켓 발사 시작점 (미설정 시 자신)
-    [SerializeField] float attackRange = 6f;
-    [SerializeField] float burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
+    [SerializeField] private Transform firePoint;           // 로켓 발사 시작점 (미설정 시 자신)
+    [SerializeField] private float attackRange = 6f;
+    [SerializeField] private float burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
 
     private CombatStats    _stats;
     private Transform      _player;
@@ -83,41 +83,33 @@ public class CatUnit : MonoBehaviour
 
         if (count == 1)
         {
-            _SpawnRocket(target, Vector2.zero);
+            _SpawnRocket(target);
             return;
         }
 
         StartCoroutine(_FireBurstCo(target, count));
     }
 
-    private IEnumerator _FireBurstCo(Enemy target, int count)
+    private IEnumerator _FireBurstCo(Enemy firstTarget, int count)
     {
-        Vector2 baseDir  = ((Vector2)target.transform.position - (Vector2)transform.position).normalized;
-        float spread     = 24f;
-        float step       = spread / (count - 1);
-        float startAngle = -spread * 0.5f;
+        _SpawnRocket(firstTarget); // 첫 발 → 가장 가까운 타겟
 
-        for (int i = 0; i < count; i++)
+        for (int i = 1; i < count; i++)
         {
-            _SpawnRocket(target, _Rotate(baseDir, startAngle + step * i));
-            if (i < count - 1) yield return _burstWait;
+            yield return _burstWait;
+
+            var all = Enemy.All;
+            Enemy t = all.Count > 0 ? all[Random.Range(0, all.Count)] : firstTarget;
+            _SpawnRocket(t);
         }
     }
 
-    private void _SpawnRocket(Enemy target, Vector2 dirHint)
+    private void _SpawnRocket(Enemy target)
     {
         if (PoolManager.Instance == null) return;
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
         GameObject go = PoolManager.Instance.GetRocket(spawnPos);
         if (go == null) return;
-        go.GetComponent<HomingRocket>().SetTarget(target, dirHint);
-    }
-
-    private static Vector2 _Rotate(Vector2 v, float degrees)
-    {
-        float rad = degrees * Mathf.Deg2Rad;
-        float cos = Mathf.Cos(rad);
-        float sin = Mathf.Sin(rad);
-        return new Vector2(cos * v.x - sin * v.y, sin * v.x + cos * v.y);
+        go.GetComponent<HomingRocket>().SetTarget(target);
     }
 }

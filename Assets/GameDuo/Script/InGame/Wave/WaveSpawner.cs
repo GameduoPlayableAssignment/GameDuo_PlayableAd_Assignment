@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField] Transform player;
-    [SerializeField] float spawnRadius = 8f;
-    [SerializeField] float spawnInterval = 0.8f;
+    [SerializeField] private Transform player;
+    [SerializeField] private float spawnRadius = 8f;
+    [SerializeField] private float spawnInterval = 0.8f;
 
     private float _timer;
 
@@ -18,6 +18,7 @@ public class WaveSpawner : MonoBehaviour
         if (_timer >= spawnInterval)
         {
             _timer = 0f;
+            _SpawnEnemy();
             _SpawnEnemy();
             _SpawnEnemy();
         }

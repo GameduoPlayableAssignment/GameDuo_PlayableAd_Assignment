@@ -11,14 +11,14 @@ public class PoolManager : MonoBehaviour
     public static PoolManager Instance { get; private set; }
 
     [Header("Prefabs")]
-    [SerializeField] GameObject rocketPrefab;
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] GameObject effectPrefab;   // ← 폭발 이펙트 프리팹 연결 위치
+    [SerializeField] private GameObject rocketPrefab;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject effectPrefab;   // ← 폭발 이펙트 프리팹 연결 위치
 
     [Header("Preload Count")]
-    [SerializeField] int rocketPreload = 20;
-    [SerializeField] int enemyPreload  = 10;
-    [SerializeField] int effectPreload = 5;
+    [SerializeField] private int rocketPreload = 20;
+    [SerializeField] private int enemyPreload  = 10;
+    [SerializeField] private int effectPreload = 5;
 
     private GameObjectPool _rocketPool;
     private GameObjectPool _enemyPool;

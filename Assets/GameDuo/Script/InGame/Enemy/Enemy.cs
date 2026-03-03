@@ -10,10 +10,10 @@ public class Enemy : MonoBehaviour
     // PlayerController 참조는 씬 전체에서 하나 → 정적 캐시
     private static Transform _player;
 
-    [SerializeField] int   damage        = 3;
-    [SerializeField] int   maxHp         = 3;
-    [SerializeField] float moveSpeed     = 2f;
-    [SerializeField] float contactRadius = 0.5f; // 플레이어 접촉 판정 반경
+    [SerializeField] private int   damage        = 3;
+    [SerializeField] private int   maxHp         = 3;
+    [SerializeField] private float moveSpeed     = 2f;
+    [SerializeField] private float contactRadius = 0.5f; // 플레이어 접촉 판정 반경
 
     private int _hp;
     private float _contactRadiusSq;

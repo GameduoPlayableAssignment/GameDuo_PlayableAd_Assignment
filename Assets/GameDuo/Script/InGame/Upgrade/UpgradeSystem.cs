@@ -4,13 +4,15 @@ using UnityEngine;
 public class UpgradeSystem : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] CatOrbitManager catOrbit;
-    [SerializeField] UpgradeUI ui;
+    [SerializeField] private CatOrbitManager catOrbit;
+    [SerializeField] private UpgradeUI ui;
+    [SerializeField] private Transform handTarget;
+    [SerializeField] private TutorialHand tutorialHand;
 
     [Header("Timing (seconds)")]
-    [SerializeField] float phase1Time = 5f;
-    [SerializeField] float phase2Time = 12f;
-    [SerializeField] float phase3Time = 18f;
+    [SerializeField] private float phase1Time = 5f;
+    [SerializeField] private float phase2Time = 12f;
+    [SerializeField] private float phase3Time = 18f;
 
     [SerializeField] CutSequenceController cutSequence;
 
@@ -48,8 +50,10 @@ public class UpgradeSystem : MonoBehaviour
         _pausedForChoice = true;
         AdGameFlow.Instance.SetState(AdState.Upgrade);
         Time.timeScale = 0f;
-
+        
         ui.Show(phase, _BuildOptions(phase), _OnPick);
+        
+        tutorialHand.ShowHand(handTarget);
     }
 
     private UpgradeOption[] _BuildOptions(UpgradePhase phase)
@@ -93,7 +97,8 @@ public class UpgradeSystem : MonoBehaviour
         _nextPhaseIndex++;
         _pausedForChoice = false;
         Time.timeScale = 1f;
-
+        tutorialHand.HideHand();
+        
         if (phase == UpgradePhase.Cats)
         {
             cutSequence.PlayFinalCut();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DownloadNowUI : MonoBehaviour
 {
-    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup canvasGroup;
 
     private void Awake()
     {

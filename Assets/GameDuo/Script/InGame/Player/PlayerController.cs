@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] FloatingJoystick joystick;
-    [SerializeField] Transform firePoint;           // 로켓 발사 시작점 (미설정 시 자신)
+    [SerializeField] private FloatingJoystick joystick;
+    [SerializeField] private Transform firePoint;           // 로켓 발사 시작점 (미설정 시 자신)
     
-    [SerializeField] float moveSpeed   = 5f;
-    [SerializeField] float attackRange = 6f;
-    [SerializeField] float burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
+    [SerializeField] private float moveSpeed   = 5f;
+    [SerializeField] private float attackRange = 6f;
+    [SerializeField] private float burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
 
     private CombatStats _stats;
     private WaitForSeconds _burstWait;
@@ -96,40 +96,36 @@ public class PlayerController : MonoBehaviour
 
         if (count == 1)
         {
-            _SpawnRocket(target, Vector2.zero);
+            _SpawnRocket(target);
             return;
         }
 
         StartCoroutine(_FireBurstCo(target, count));
     }
 
-    private IEnumerator _FireBurstCo(Enemy target, int count)
+    private IEnumerator _FireBurstCo(Enemy firstTarget, int count)
     {
-        Vector2 baseDir  = ((Vector2)target.transform.position - (Vector2)transform.position).normalized;
-        float spread     = 24f;
-        float step       = spread / (count - 1);
-        float startAngle = -spread * 0.5f;
+        _SpawnRocket(firstTarget); // 첫 발 → 가장 가까운 타겟
 
-        for (int i = 0; i < count; i++)
+        for (int i = 1; i < count; i++)
         {
-            _SpawnRocket(target, _Rotate(baseDir, startAngle + step * i));
+            yield return _burstWait;
 
-            if (i < count - 1)
-            {
-                yield return _burstWait;
-            }
+            var all = Enemy.All;
+            Enemy t = all.Count > 0 ? all[Random.Range(0, all.Count)] : firstTarget;
+            _SpawnRocket(t);
         }
     }
 
-    private void _SpawnRocket(Enemy target, Vector2 dirHint)
+    private void _SpawnRocket(Enemy target)
     {
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
         GameObject go = PoolManager.Instance.GetRocket(spawnPos);
-        
-        if (go == null) 
+
+        if (go == null)
             return;
-        
-        go.GetComponent<HomingRocket>().SetTarget(target, dirHint);
+
+        go.GetComponent<HomingRocket>().SetTarget(target);
     }
 
     private void _Flip()
@@ -137,13 +133,5 @@ public class PlayerController : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1f;
         transform.localScale = scale;
-    }
-
-    private static Vector2 _Rotate(Vector2 v, float degrees)
-    {
-        float rad = degrees * Mathf.Deg2Rad;
-        float cos = Mathf.Cos(rad);
-        float sin = Mathf.Sin(rad);
-        return new Vector2(cos * v.x - sin * v.y, sin * v.x + cos * v.y);
     }
 }
