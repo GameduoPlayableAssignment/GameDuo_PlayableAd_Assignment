@@ -7,10 +7,11 @@ public class CatUnit : MonoBehaviour
     [SerializeField] float attackRange = 6f;
     [SerializeField] float burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
 
-    private CombatStats _stats;
-    private Transform _player;
-    private Enemy _currentTarget;
-    private float _timer;
+    private CombatStats    _stats;
+    private Transform      _player;
+    private Enemy          _currentTarget;
+    private WaitForSeconds _burstWait;
+    private float          _timer;
 
     // CatOrbitManager 가 LateUpdate 에서 Lerp 속도로 사용
     public float FollowSpeed { get; private set; }
@@ -18,10 +19,11 @@ public class CatUnit : MonoBehaviour
     // CatOrbitManager 에서 Instantiate 직후 호출
     public void Init(CombatStats sharedStats, Transform playerTransform, float followSpeed)
     {
-        _stats       = sharedStats;
-        _player      = playerTransform;
+        _stats     = sharedStats;
+        _player    = playerTransform;
         FollowSpeed = followSpeed;
-        _timer       = Random.Range(0f, sharedStats.attackInterval); // 동시 발사 방지
+        _timer     = Random.Range(0f, sharedStats.attackInterval); // 동시 발사 방지
+        _burstWait = new WaitForSeconds(burstDelay);
     }
 
     private void Update()
@@ -94,12 +96,11 @@ public class CatUnit : MonoBehaviour
         float spread     = 24f;
         float step       = spread / (count - 1);
         float startAngle = -spread * 0.5f;
-        var   wait       = new WaitForSeconds(burstDelay);
 
         for (int i = 0; i < count; i++)
         {
             _SpawnRocket(target, _Rotate(baseDir, startAngle + step * i));
-            if (i < count - 1) yield return wait;
+            if (i < count - 1) yield return _burstWait;
         }
     }
 

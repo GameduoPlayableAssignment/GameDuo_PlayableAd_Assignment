@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 4e6778132a6814a0da204b5851a5e23f
+guid: b46c86a9720b8412782490cd7cdf9280
 AssetOrigin:
   serializedVersion: 1
   productId: 83019
   packageName: 2D Animal Character Pack
   packageVersion: 1.1
-  assetPath: Assets/2D Animal Character Pack/Sprites/Characters/Cow/Cow.png
+  assetPath: Assets/2D Animal Character Pack/Sprites/Characters/Cats/Toon.png
   uploadId: 204059
 TextureImporter:
   internalIDToNameTable:
@@ -162,12 +162,12 @@ TextureImporter:
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 65
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -332,12 +332,12 @@ TextureImporter:
       name: Face-idle
       rect:
         serializedVersion: 2
-        x: 501
-        y: 416
-        width: 246
-        height: 322
+        x: 542
+        y: 580
+        width: 275
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.77}
+      pivot: {x: 0.13705611, y: 0.69041276}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -354,12 +354,12 @@ TextureImporter:
       name: Face-attack
       rect:
         serializedVersion: 2
-        x: 750
-        y: 416
-        width: 246
-        height: 322
+        x: 542
+        y: 406
+        width: 275
+        height: 144
       alignment: 9
-      pivot: {x: 0.15, y: 0.77}
+      pivot: {x: 0.14118053, y: 0.69968253}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -376,12 +376,12 @@ TextureImporter:
       name: Face-hurt
       rect:
         serializedVersion: 2
-        x: 1001
-        y: 416
-        width: 246
-        height: 322
+        x: 534
+        y: 234
+        width: 284
+        height: 147
       alignment: 9
-      pivot: {x: 0.15, y: 0.77}
+      pivot: {x: 0.16852623, y: 0.70060635}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -398,12 +398,12 @@ TextureImporter:
       name: Face-happy
       rect:
         serializedVersion: 2
-        x: 690
-        y: 44
-        width: 246
-        height: 322
+        x: 884
+        y: 579
+        width: 283
+        height: 136
       alignment: 9
-      pivot: {x: 0.15, y: 0.77}
+      pivot: {x: 0.16735494, y: 0.69323367}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -420,12 +420,12 @@ TextureImporter:
       name: Face-angry
       rect:
         serializedVersion: 2
-        x: 951
-        y: 44
-        width: 246
-        height: 322
+        x: 890
+        y: 379
+        width: 278
+        height: 179
       alignment: 9
-      pivot: {x: 0.15, y: 0.77}
+      pivot: {x: 0.14505269, y: 0.5475409}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

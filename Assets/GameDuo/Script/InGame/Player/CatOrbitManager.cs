@@ -15,6 +15,10 @@ public class CatOrbitManager : MonoBehaviour
     readonly List<CatUnit> cats = new();
     private Transform _player;
 
+    // 고양이 수가 바뀔 때만 재계산하는 궤도 오프셋 캐시 (sin/cos 반복 연산 제거)
+    private Vector2[] _orbitOffsets = System.Array.Empty<Vector2>();
+    private int _cachedCount  = 0;
+
     private void Awake()
     {
         _player = transform;
@@ -24,19 +28,19 @@ public class CatOrbitManager : MonoBehaviour
     private void LateUpdate()
     {
         int count = cats.Count;
-        
-        if (count == 0) 
+
+        if (count == 0)
             return;
 
-        float step = 360f / count;
+        // 고양이 수가 바뀐 경우에만 sin/cos 재계산
+        if (count != _cachedCount)
+            _RebuildOffsets(count);
+
+        Vector2 playerPos = _player.position;
 
         for (int i = 0; i < count; i++)
         {
-            float angle = step * i;
-            float rad   = angle * Mathf.Deg2Rad;
-
-            Vector2 targetPos = (Vector2)_player.position
-                              + new Vector2(Mathf.Cos(rad), Mathf.Sin(rad)) * radius;
+            Vector2 targetPos = playerPos + _orbitOffsets[i] * radius;
 
             // 개별 속도로 lerp → 이동 시 고양이마다 약간씩 다른 반응
             cats[i].transform.position = Vector2.Lerp(
@@ -44,6 +48,18 @@ public class CatOrbitManager : MonoBehaviour
                 targetPos,
                 cats[i].FollowSpeed * Time.deltaTime
             );
+        }
+    }
+
+    private void _RebuildOffsets(int count)
+    {
+        _cachedCount  = count;
+        _orbitOffsets = new Vector2[count];
+        float step = 360f / count * Mathf.Deg2Rad;
+        for (int i = 0; i < count; i++)
+        {
+            float rad = step * i;
+            _orbitOffsets[i] = new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
         }
     }
 

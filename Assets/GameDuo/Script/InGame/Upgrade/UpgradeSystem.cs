@@ -21,8 +21,6 @@ public class UpgradeSystem : MonoBehaviour
     private void Start()
     {
         ui.Hide();
-        _nextPhaseIndex = 0;
-        _pausedForChoice = false;
     }
 
     private void Update()
@@ -84,7 +82,7 @@ public class UpgradeSystem : MonoBehaviour
                 };
         }
 
-        return new UpgradeOption[0];
+        return System.Array.Empty<UpgradeOption>();
     }
 
     private void _OnPick(UpgradePhase phase, UpgradeOption picked)

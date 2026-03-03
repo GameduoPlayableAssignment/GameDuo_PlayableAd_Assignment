@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] float contactRadius = 0.5f; // 플레이어 접촉 판정 반경
 
     private int _hp;
+    private float _contactRadiusSq;
 
     private void OnEnable()
     {
         _all.Add(this);
         _hp = maxHp;
+        _contactRadiusSq = contactRadius * contactRadius;
 
         if (_player != null) 
             return;
@@ -43,7 +45,8 @@ public class Enemy : MonoBehaviour
         if (_player == null) 
             return;
 
-        Vector2 dir = ((Vector2)_player.position - (Vector2)transform.position).normalized;
+        Vector2 delta = (Vector2)_player.position - (Vector2)transform.position;
+        Vector2 dir   = delta.normalized;
         transform.position += (Vector3)(dir * moveSpeed * Time.deltaTime);
 
         // 이동 방향에 따라 좌우 플립
@@ -55,8 +58,7 @@ public class Enemy : MonoBehaviour
         }
 
         // 플레이어 접촉 판정 (물리 없이 거리 직접 체크)
-        float distSq = ((Vector2)_player.position - (Vector2)transform.position).sqrMagnitude;
-        if (distSq <= contactRadius * contactRadius)
+        if (delta.sqrMagnitude <= _contactRadiusSq)
         {
             PlayerHealth.Instance?.TakeDamage(damage);
 

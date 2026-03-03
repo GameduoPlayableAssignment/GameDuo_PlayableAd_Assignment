@@ -5,14 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] FloatingJoystick joystick;
-    [SerializeField] float     moveSpeed   = 5f;
-    [SerializeField] float     attackRange = 6f;
-    [SerializeField] float     burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
     [SerializeField] Transform firePoint;           // 로켓 발사 시작점 (미설정 시 자신)
+    
+    [SerializeField] float moveSpeed   = 5f;
+    [SerializeField] float attackRange = 6f;
+    [SerializeField] float burstDelay  = 0.05f; // 멀티샷 로켓 간 딜레이(초)
 
     private CombatStats _stats;
+    private WaitForSeconds _burstWait;
     private float _attackTimer;
-    private bool  _facingLeft = false;
+    private bool _facingLeft;
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _attackTimer = _stats != null ? Random.Range(0f, _stats.attackInterval) : 0f;
+        _burstWait   = new WaitForSeconds(burstDelay);
     }
 
     private void Update()
@@ -106,15 +109,14 @@ public class PlayerController : MonoBehaviour
         float spread     = 24f;
         float step       = spread / (count - 1);
         float startAngle = -spread * 0.5f;
-        var   wait       = new WaitForSeconds(burstDelay);
 
         for (int i = 0; i < count; i++)
         {
             _SpawnRocket(target, _Rotate(baseDir, startAngle + step * i));
-            
+
             if (i < count - 1)
             {
-                yield return wait;
+                yield return _burstWait;
             }
         }
     }

@@ -11,7 +11,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (AdGameFlow.Instance != null && !AdGameFlow.Instance.IsPlaying) 
+        if (!AdGameFlow.Instance.IsPlaying)
             return;
 
         _timer += Time.deltaTime;
