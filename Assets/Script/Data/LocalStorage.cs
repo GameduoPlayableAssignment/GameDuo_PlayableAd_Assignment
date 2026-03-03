@@ -1,3 +1,4 @@
+using Model.Vo;
 using UnityEngine;
 
 public static class LocalStorage
@@ -134,5 +135,35 @@ public static class LocalStorage
     {
         get => PlayerPrefsExt.GetBool("HasAgreedToTerms", false);
         set => PlayerPrefsExt.SetBool("HasAgreedToTerms", value);
+    }
+    
+    public static int CurrentStage
+    {
+        get => PlayerPrefsExt.GetInt("CurrentStage", 1);
+        set => PlayerPrefsExt.SetInt("CurrentStage", value);
+    }
+    
+    public static int Gold
+    {
+        get => PlayerPrefsExt.GetInt("Gold", CommonDataVo.StartGold);
+        set => PlayerPrefsExt.SetInt("Gold", value);
+    }
+    
+    public static int SkillAddTileCount
+    {
+        get => PlayerPrefsExt.GetInt("SkillAddTileCount", CommonDataVo.SkillAddTileCount);
+        set => PlayerPrefsExt.SetInt("SkillAddTileCount", value);
+    }
+    
+    public static int SkillHintCount
+    {
+        get => PlayerPrefsExt.GetInt("SkillHintCount", CommonDataVo.SkillCount);
+        set => PlayerPrefsExt.SetInt("SkillHintCount", value);
+    }
+    
+    public static int SkillHammerCount
+    {
+        get => PlayerPrefsExt.GetInt("SkillHammerCount", CommonDataVo.SkillCount);
+        set => PlayerPrefsExt.SetInt("SkillHammerCount", value);
     }
 }

@@ -1,0 +1,16 @@
+Hand.png
+size:256,256
+filter:Linear,Linear
+pma:true
+Arrow
+bounds:141,142,102,112
+Finger
+bounds:103,47,64,73
+Hand
+bounds:2,122,137,132
+offsets:1,1,139,134
+Shadow
+bounds:2,2,99,118
+Touch
+bounds:169,68,72,72
+offsets:1,1,74,74

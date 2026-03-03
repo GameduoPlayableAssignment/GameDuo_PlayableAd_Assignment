@@ -205,7 +205,7 @@ namespace Manager.Game
             {
                 LocalStorage.IsSpeedUp = value;
                 if (UnityEngine.Time.timeScale == 0) return;
-                SetTimeScale(LocalStorage.IsSpeedUp ? defaultTimeScale * CommonDataVo.FastForwardSpeed : 1f);
+                // SetTimeScale(LocalStorage.IsSpeedUp ? defaultTimeScale * CommonDataVo.FastForwardSpeed : 1f);
             }
         }
 
@@ -217,7 +217,7 @@ namespace Manager.Game
             }
             else
             {
-                SetTimeScale(LocalStorage.IsSpeedUp ? defaultTimeScale * CommonDataVo.FastForwardSpeed : 1f);
+                // SetTimeScale(LocalStorage.IsSpeedUp ? defaultTimeScale * CommonDataVo.FastForwardSpeed : 1f);
             }
         }
 

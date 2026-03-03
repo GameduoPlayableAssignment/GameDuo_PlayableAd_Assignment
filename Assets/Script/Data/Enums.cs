@@ -24,13 +24,6 @@ public enum LanguageType
     Max
 }
 
-public enum State
-{
-    Equipped,
-    Unequipped,
-    DontHave,
-}
-
 public enum TierType
 {
     COMMON = 1, 
@@ -53,5 +46,35 @@ public enum BuildingState
 
 public enum ItemType
 {
-    Dummy = 1,
+    Dummy,
+    Gold,
+    AddTile,
+    Hint,
+    Hammer
 }
+
+public enum UpgradePhase
+{
+    Cats = 0,
+    AttackSpeed = 1,
+    Multishot = 2
+}
+
+public enum UpgradeType
+{
+    AddCats,
+    AttackSpeedMul,
+    AddMultishot
+}
+
+public struct UpgradeOption
+{
+    public UpgradeType type;
+    public int intValue;     // +3, +5, +10 / +3,+5,+7
+    public float floatValue; // 공속 배율 (0.85, 0.7, 0.55 등)
+
+    public string Title;
+    public string Desc;
+}
+
+

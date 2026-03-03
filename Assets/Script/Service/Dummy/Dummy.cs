@@ -13,7 +13,7 @@ namespace Service.Dummy
             return new Dummy
             {
                 Idx = idx,
-                CurrentState = State.DontHave,
+                // CurrentState = State.DontHave,
                 CurrentShards = 0,
                 Level = 1,
             };

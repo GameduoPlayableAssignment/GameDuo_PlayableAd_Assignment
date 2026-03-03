@@ -1,9 +1,5 @@
-using DarkTonic.MasterAudio;
-using DG.Tweening;
-using Manager.Game;
 using Manager.Popup;
 using System;
-using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -66,11 +62,6 @@ namespace Base
                 return;
             }
 
-            // if (UIControl.Instance && IsFrontResourceBar)
-            // {
-            //     ResourceBar.Instance.SetResourceType(IsForceOnResource);
-            // }
-
             _popupAnimation = panelAnimation;
             _popupAnimation.Init();
         }
@@ -82,21 +73,15 @@ namespace Base
         {
             IsShow = true;
             
-            // if (IsFrontResourceBar)
-            // {
-            //     ResourceBar.Instance.SetOrderFront();
-            // }
+            if (IsFrontResourceBar)
+            {
+                // ResourceBar.Instance.SetOrderFront();
+            }
 
-            // if (!TutorialService.Instance.IsGuideRunning)
-            // {
-            //     GameManager.Instance.IsLockedScreen = false;
-            // }
             if (_popupAnimation)
             {
                 _popupAnimation.OpenAnimation();
             }
-
-            MasterAudio.PlaySoundAndForget(SoundList.sound_dummy);
         }
 
 

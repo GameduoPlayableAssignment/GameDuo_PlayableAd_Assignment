@@ -80,7 +80,7 @@ namespace Service.Game
         
         public void RunDoubleSpeed()
         {
-            TimerService.Instance.AddUnscaledTimer(TimerKey.DoubleSpeed, CommonDataVo.FastForwardDuration);
+            // TimerService.Instance.AddUnscaledTimer(TimerKey.DoubleSpeed, CommonDataVo.FastForwardDuration);
         }
 
         // private string _GetFormattedNewDayRemainTime()

@@ -44,12 +44,12 @@ public partial class UIControl : MonoBehaviour
 
     // TODO: 테스트
 #if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            print($"Test - {TimerService.Instance.GetScaledTimer("0")}");
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.A))
+    //     {
+    //         print($"Test - {TimerService.Instance.GetScaledTimer("0")}");
+    //     }
+    // }
 #endif
 }
