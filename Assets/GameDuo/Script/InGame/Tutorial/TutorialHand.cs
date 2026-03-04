@@ -38,7 +38,7 @@ public class TutorialHand : MonoBehaviour
     
     private void _SetHandAnimation(string animationName = "Touch")
     {
-        skeletonGraphic.AnimationState.SetAnimation(0, animationName, true);
+        skeletonGraphic.AnimationState.SetAnimation(0, animationName, true).MixDuration = 0f;
     }
 
     public void ShowHand(Transform target)

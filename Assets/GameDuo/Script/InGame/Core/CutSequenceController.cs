@@ -38,6 +38,13 @@ public class CutSequenceController : MonoBehaviour
     {
         Time.timeScale = slowmoScale;
 
+        AdGameFlow.Instance.SetState(AdState.CTA);
+        
+        if (ctaUI != null)
+        {
+            ctaUI.Show(slowmoDurationUnscaled);
+        }
+        
         float t = 0f;
         while (t < slowmoDurationUnscaled)
         {
@@ -46,11 +53,6 @@ public class CutSequenceController : MonoBehaviour
         }
 
         Time.timeScale = 0f;
-        AdGameFlow.Instance.SetState(AdState.CTA);
         
-        if (ctaUI != null)
-        {
-            ctaUI.Show();
-        }
     }
 }

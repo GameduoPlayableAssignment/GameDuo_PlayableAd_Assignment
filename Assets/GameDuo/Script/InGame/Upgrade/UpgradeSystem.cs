@@ -64,7 +64,7 @@ public class UpgradeSystem : MonoBehaviour
                 return new[]
                 {
                     new UpgradeOption{ type=UpgradeType.AddCats, intValue=1,  Title="+1 Cats",  Desc="Summon 1 cats"  },
-                    new UpgradeOption{ type=UpgradeType.AddCats, intValue=3,  Title="+5 Cats",  Desc="Summon 3 cats"  },
+                    new UpgradeOption{ type=UpgradeType.AddCats, intValue=3,  Title="+3 Cats",  Desc="Summon 3 cats"  },
                     new UpgradeOption{ type=UpgradeType.AddCats, intValue=10, Title="+10 Cats", Desc="Summon 10 cats" },
                 };
 

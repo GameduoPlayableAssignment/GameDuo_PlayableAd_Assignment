@@ -20,7 +20,6 @@ public class WaveSpawner : MonoBehaviour
             _timer = 0f;
             _SpawnEnemy();
             _SpawnEnemy();
-            _SpawnEnemy();
         }
     }
 

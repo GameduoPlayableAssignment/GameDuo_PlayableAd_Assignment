@@ -17,6 +17,16 @@ public class Enemy : MonoBehaviour
 
     private int _hp;
     private float _contactRadiusSq;
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    // Renderer 기반 가시성 콜백 — per-frame 연산 없이 Animator ON/OFF
+    private void OnBecameVisible()   { if (_animator) _animator.enabled = true;  } // 화면 진입
+    private void OnBecameInvisible() { if (_animator) _animator.enabled = false; } // 화면 이탈
 
     private void OnEnable()
     {
